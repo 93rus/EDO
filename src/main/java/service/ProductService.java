@@ -1,13 +1,16 @@
 package service;
 
 import model.Product;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
  * Created by Баранов on 23.05.2018.
  */
-public interface ProductController {
+
+public interface ProductService {
 
     public void addProduct(Product product);
 

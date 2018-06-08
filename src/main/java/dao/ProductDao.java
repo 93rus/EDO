@@ -8,6 +8,8 @@ import java.util.List;
  * Created by Баранов on 23.05.2018.
  */
 public interface ProductDao {
+
+
     public void addProduct(Product product);
 
     public void updateProduct(Product product);
@@ -17,4 +19,6 @@ public interface ProductDao {
     public Product getByProductId(int id);
 
     public List<Product> listProduct();
+
+
 }

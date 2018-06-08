@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Баранов on 23.05.2018.
  */
-public interface UserController {
+public interface UserService {
 
     public void addUser(User user);
 

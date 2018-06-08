@@ -1,0 +1,80 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="java"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- Database Information -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/dbname" />
+        <property name="username" value="username" />
+        <property name="password" value="password" />
+
+
+        <property name="connectionProperties">
+            <props>
+                <prop key="socketTimeout">10</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Hibernate 4 SessionFactory Bean definition -->
+    <bean id="hibernate4AnnotatedSessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>model.Product</value>
+                <value>model.User</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect
+                </prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--ProductDao and ProductService beans-->
+    <bean id="productDao" class="dao.ProductDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="productService" class="service.ProductServiceImpl">
+        <property name="productDao" ref="productDao"/>
+    </bean>
+
+    <!--UserDao and UserService beans-->
+    <bean id="userDao" class="dao.UserDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="userService" class="service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <context:component-scan base-package="java"/>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+
+</beans>
