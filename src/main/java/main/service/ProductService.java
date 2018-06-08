@@ -1,8 +1,6 @@
-package service;
+package main.service;
 
-import model.Product;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
+import main.model.Product;
 
 import java.util.List;
 
