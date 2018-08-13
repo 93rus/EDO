@@ -1,6 +1,6 @@
-package main.service;
+package app.service;
 
-import main.model.Product;
+import app.model.Product;
 
 import java.util.List;
 

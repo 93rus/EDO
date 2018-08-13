@@ -1,7 +1,7 @@
-package main.service;
+package app.service;
 
-import main.dao.ProductDao;
-import main.model.Product;
+import app.dao.ProductDao;
+import app.model.Product;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

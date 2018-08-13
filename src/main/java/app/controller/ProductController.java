@@ -1,6 +1,6 @@
-package main.controller;
+package app.controller;
 
-import main.model.Product;
+import app.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import main.service.ProductService;
+import app.service.ProductService;
 
 @Controller
 public class ProductController {
@@ -23,7 +23,7 @@ public class ProductController {
     @RequestMapping(value = "products", method = RequestMethod.GET)
     public String listProduct(Model model){
         model.addAttribute("product", new Product());
-        model.addAttribute("listProduct", this.productService.listProduct());
+        model.addAttribute("listProducts", this.productService.listProduct());
 
         return "products";
     }
@@ -48,8 +48,8 @@ public class ProductController {
 
     @RequestMapping("edit/{id}")
     public String editProduct(@PathVariable("id") int id, Model model){
-        model.addAttribute("user", this.productService.getByProductId(id));
-        model.addAttribute("listUsers", this.productService.listProduct());
+        model.addAttribute("product", this.productService.getByProductId(id));
+        model.addAttribute("listProducts", this.productService.listProduct());
 
         return "products" ;
     }

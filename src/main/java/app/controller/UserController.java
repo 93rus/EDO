@@ -1,13 +1,14 @@
-package main.controller;
+package app.controller;
 
-import main.model.User;
+import app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import main.service.UserService;
+import app.service.UserService;
 
-@RestController
+@Controller
 public class UserController {
     private UserService userService;
 

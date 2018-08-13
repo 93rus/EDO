@@ -1,6 +1,6 @@
-package main.dao;
+package app.dao;
 
-import main.model.Product;
+import app.model.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
